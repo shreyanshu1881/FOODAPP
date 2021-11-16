@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Admin Login</h2>
+    <div class="container">
+        <div class="container">
+            <div class="row ">
+                <div class="col-7 image-left">
+
+                </div>
+                <div class="col-5 mt-2">
+
+                    <form method="POST" action="/login" novalidate class="needs-validation">
+                        <div class="form-group">
+                            <label for="email">Email address:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </form>
+
+                    <hr>
+                    <div>
+                        If you haven't had an account. <a href="/register">Create a new account</a>.
+                    </div>
+                    <div>
+                        Return to <a href="/">Home Page</a>
+                    </div>
+                    <br><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

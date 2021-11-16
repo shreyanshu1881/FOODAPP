@@ -1,0 +1,45 @@
+<% layout('layouts/boilerplate') %>
+    <h1>
+        <%= infos[0].resto_name %>
+    </h1>
+
+    <h3>
+        in
+        <%= infos[0].resto_city %>
+    </h3>
+    <h4>
+        <%= infos[0].resto_address %>
+    </h4>
+
+    <% for (let info of infos) {%>
+
+        <div class="card" mb-3>
+            <div class="row">
+                <div class="col-6 offset-3">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= info.food_name %>
+                        </h5>
+                        <p>
+                            <small class="card-text text-muted">
+                                <%= info.price %>
+                            </small>
+                        </p>
+                        <p>
+                            <div class="Quantity">Quantity:</div>
+                            <div class="maxpoint">
+                                <div class="buttons">
+                                    <button class="btn btn-success" id="p1">+1</button>
+                                    <button id="reset" class="btn btn-primary">Reset</button>
+                                </div>
+                            </div>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <% } %>
+            <a href="/restaurants">back to restaurants</a>

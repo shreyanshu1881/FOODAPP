@@ -1,0 +1,42 @@
+<% layout('layouts/boilerplate') %>
+    <div class="container">
+        <div class="container">
+            <div class="row ">
+                <div class="col-7 image-left">
+
+                </div>
+                <div class="col-5 mt-2">
+
+                    <form method="POST" action="/register" novalidate class="needs-validation">
+                        <!-- <div class="form-group">
+                            <label for="fullName">Full Name:</label>
+                            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter Full Name" required>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="email">Email address:(*)</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:(*)</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="confirmationPassword">Confirm Password:(*)</label>
+                            <input type="password" class="form-control" id="confirmationPassword" name="confirmationPassword" placeholder="Confirm Password" required>
+                        </div> -->
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+
+                    <hr>
+                    <div>
+                        If you already have an account. <a href="/login">Login</a>.
+                    </div>
+                    <div>
+                        Return to <a href="/">Home Page</a>
+                    </div>
+                    <br><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
