@@ -4,7 +4,7 @@
 const bcrypt = require('bcryptjs');
 var LocalStrategy = require('passport-local').Strategy;
 
-var mysql = require('mysql');
+var mysql = require('mysql2');
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
     password: 'password'
 });
 
-connection.query('USE food_manage');
+connection.query('USE food_app');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -66,15 +66,19 @@ module.exports = function(passport) {
                     var newUserMysql = new Object();
 
                     newUserMysql.email = email;
+                    // newUserMysql.phone_no = phone_no;
+                    // newUserMysql.default_address = default_address;
+                    // newUserMysql.first_name = first_name;
+                    // newUserMysql.last_name = last_name;
                     bcrypt.genSalt(10, function(err, salt) {
                         if (err) return next(err);
                         bcrypt.hash(req.body.password, salt, function(err, hash) {
                             if (err) return next(err);
                             newUserMysql.password = hash; // Or however suits your setup
                             // Store the user to the database, then send the response
-                            var insertQuery = "INSERT INTO users ( email, password ) values (?,?)";
-                            console.log(insertQuery);
-                            connection.query(insertQuery, [newUserMysql.email, newUserMysql.password], function(err, results) {
+                            var insertQuery = "INSERT INTO users ( first_name,last_name,email, pass,phone_no,default_address ) values (?,?,?,?,?,?)";
+
+                            connection.query(insertQuery, [req.body.first_name, req.body.last_name, newUserMysql.email, newUserMysql.password, req.body.phone_no, req.body.default_address], function(err, results) {
                                 if (err) throw err;
                                 newUserMysql.id = results.insertId;
 
@@ -111,7 +115,7 @@ module.exports = function(passport) {
                     return done(null, false, req.flash('error', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
                 }
 
-                bcrypt.compare(req.body.password, rows[0].password, function(err, res) {
+                bcrypt.compare(req.body.password, rows[0].pass, function(err, res) {
                     if (err) { return done(err); }
                     if (res === false) {
                         return done(null, false, req.flash('error', 'Oops! Wrong password.'));
