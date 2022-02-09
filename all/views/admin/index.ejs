@@ -1,0 +1,44 @@
+<%- layout('layouts/boilerplate') %>
+    <h1>All Food Items</h1>
+    <div>
+        <a href="/admin/foods/new">Add new FOOD Item</a>
+    </div>
+
+    <% for (let food of foods){ %>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" src="<%= food.img_url %> " alt="">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= food.food_name %>
+                        </h5>
+                        <p class="card-text">
+                            Rs.
+                            <%= food.unit_price %>
+                        </p>
+                        <p class="card-text">
+                            Category:
+                            <%= food.category %>
+                        </p>
+                        <p class="card-text">
+                            Type:
+                            <%= food.food_type %>
+                        </p>
+                        <p class="card-text ">
+                            <small class="TEXT-MUTED">
+                                Status:<%= food.food_status %>
+
+                            </small>
+                        </p>
+                        <a class="btn btn-primary" href="/admin/food/<%= food.food_id %> ">view <%= food.food_name %> </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <% } %>

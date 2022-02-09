@@ -1,0 +1,95 @@
+<% layout('layouts/boilerplate') %>
+    <%if(orders.length>0){%>
+        <section class="orders light-section">
+            <div class="container mx-auto pt-12">
+                <h1 class="font-bold text-lg mb-4">All orders</h1>
+                <table class="w-full table-auto bg-white">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 text-left">Orders</th>
+                            <th class="px-4 py-2 text-left">Foods</th>
+                            <th class="px-4 py-2 text-left">Customer</th>
+                            <th class="px-4 py-2 text-left">Address</th>
+                            <th class="px-4 py-2 text-left">status</th>
+                            <th class="px-4 py-2 text-left">Placed at</th>
+                            <th class="px-4 py-2 text-left">Payment Status</th>
+                            <th class="px-4 py-2 text-left">Payment Type </th>
+                            <th class="px-4 py-2 text-left">Total Price </th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="orderTableBody">
+                        <% for (let order of orders) {%>
+                            <tr>
+
+                                <td class="border px-4 py-2 text-green-900">
+                                    <p>
+                                        <%= order.order_id%>
+                                    </p>
+
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <% for (let food of foods) {%>
+                                        <%if(order.order_id === food.order_id){%>
+                                            <div class="border-bottom">
+                                                <p>
+                                                    <%= food.food_name %> -
+                                                        <%= food.food_quantity %> x </p>
+                                            </div>
+                                            <%}}%>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <%= order.customer_name %>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <%= order.delivery_address %>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <div class="inline-block relative w-64">
+                                        <form action="/admin/order/status" method="POST">
+                                            <input type="hidden" name="orderId" value="<%= order.order_id %>">
+                                            <select name="status" onchange="this.form.submit()" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                        <option value="PLACED" <%= order.order_status === 'PLACED' ? 'selected' : '' %>>
+                                            Placed</option>
+                                        <option value="confirmed" <%= order.order_status === 'confirmed' ? 'selected' : '' %>>
+                                            Confirmed</option>
+                                        <option value="prepared" <%= order.order_status === 'prepared' ? 'selected' : '' %>>
+                                            Prepared</option>
+                                        <option value="delivered" <%= order.order_status === 'delivered' ? 'selected' : '' %>>
+                                            Delivered
+                                        </option>
+                                        <option value="completed" <%= order.order_status === 'completed' ? 'selected' : '' %>>
+                                            Completed
+                                        </option>
+                                    </select>
+                                        </form>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                    </svg>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <%= moment(order.date_time).format('hh:mm A') %>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <%= order.payment_status ? 'paid' : 'not-paid' %>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <%= order.payment_type %>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <%= order.total_price %>
+                                </td>
+                            </tr>
+                            <% }%>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <%}else {%>
+            <h1>No orders yet</h1>
+            <%}%>

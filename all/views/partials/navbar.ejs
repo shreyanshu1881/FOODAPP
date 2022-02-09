@@ -1,27 +1,118 @@
-<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/foods">FOOD</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<%if(!currentUser){%>
+
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/foods">FOOD</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="navbar-nav">
-                <a class="nav-link " aria-current="page" href="/">Home</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav">
+                    <a class="nav-link " aria-current="page" href="/">Home</a>
 
 
-                <a class="nav-link" href="/foods">Foods</a>
+                    <a class="nav-link" href="/foods">Menu</a>
 
 
-                <a class="nav-link" href="#">Order</a>
-            </div>
-            <div class="navbar-nav ms-auto">
-                <%if(!currentUser) {%>
-                    <a class="nav-link" href="/login ">Log in</a>
-                    <a class="nav-link" href="/register ">Sign up</a>
-                    <%} else {%>
-                        <a class="nav-link" href="/logout ">Logout</a>
-                        <%}%>
+                    <a class="nav-link" href="/customerorders">Orders</a>
+
+                </div>
+                <div class="navbar-nav ms-auto">
+
+
+
+
+                    <a class="nav-link" href="/cart"><span class="border border-muted rounded-3 p-1"><span id="cartCounter" class="text-muted"><%= session.cart ? session.cart.totalQty : '' %></span>   <i class="bi bi-cart"></i></span></a>
+
+
+
+                    <%if(!currentUser) {%>
+                        <a class="nav-link" href="/login ">Log in</a>
+                        <a class="nav-link" href="/register ">Sign up</a>
+                        <%} else {%>
+
+                            <a class="nav-link" href="/logout ">Logout</a>
+                            <%}%>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
+    <%}else if(currentUser.u_role==='admin'){%>
+        <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/admin/orders">FOOD</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav">
+                        <!-- <a class="nav-link " aria-current="page" href="/">Home</a> -->
+
+
+                        <a class="nav-link" href="/admin/foods">All Menu</a>
+
+
+                        <a class="nav-link" href="/admin/orders">Orders</a>
+
+                    </div>
+                    <div class="navbar-nav ms-auto">
+
+
+
+
+                        <!-- <a class="nav-link" href="/cart"><span class="border border-muted rounded-3 p-1"><span id="cartCounter" class="text-muted"><%#= session.cart ? session.cart.totalQty : '' %></span>   <i class="bi bi-cart"></i></span></a> -->
+
+
+
+                        <%if(!currentUser) {%>
+                            <a class="nav-link" href="/login ">Log in</a>
+                            <a class="nav-link" href="/register ">Sign up</a>
+                            <%} else {%>
+
+                                <a class="nav-link" href="/logout ">Logout</a>
+                                <%}%>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <%}else{%>
+
+            <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/foods">FOOD</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <div class="navbar-nav">
+                            <a class="nav-link " aria-current="page" href="/">Home</a>
+
+
+                            <a class="nav-link" href="/foods">Menu</a>
+
+
+                            <a class="nav-link" href="/customerorders">Orders</a>
+
+                        </div>
+                        <div class="navbar-nav ms-auto">
+
+
+
+
+                            <a class="nav-link" href="/cart"><span class="border border-muted rounded-3 p-1"><span id="cartCounter" class="text-muted"><%= session.cart ? session.cart.totalQty : '' %></span>   <i class="bi bi-cart"></i></span></a>
+
+
+
+                            <%if(!currentUser) {%>
+                                <a class="nav-link" href="/login ">Log in</a>
+                                <a class="nav-link" href="/register ">Sign up</a>
+                                <%} else {%>
+
+                                    <a class="nav-link" href="/logout ">Logout</a>
+                                    <%}%>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <%}%>

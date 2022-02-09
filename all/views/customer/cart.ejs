@@ -1,0 +1,67 @@
+<% layout('layouts/boilerplate') %>
+
+
+
+    <% if(session.cart) { %>
+        <div class="order container mx-2 xl:w-1/2">
+            <div class="flex mt-10 items-center border-b border-gray-300 pb-4">
+                <img src="/images/cart-black.png" alt="">
+                <h1 class="font-bold ml-4  text-2xl">Order Summary</h1>
+            </div>
+            <div class="food-list">
+                <% for(let food of Object.values(session.cart.items)) { %>
+                    <div class="flex items-center my-8">
+                        <img class="w-24" src="/images/pizza.png<%#= pizza.item.image %>" alt="">
+                        <div class="flex-1 ml-4">
+                            <h3>
+                                <%= food.item.food_name %>
+                            </h3>
+
+                        </div>
+                        <span class="flex-1"><%= food.qty %> x</span>
+                        <span class="font-bold text-lg">₹ <%= food.item.unit_price * food.qty %></span>
+                    </div>
+                    <%  } %>
+
+            </div>
+            <hr>
+            <div class="text-right py-4">
+                <div>
+                    <span class="text-lg font-bold">Total Amount:</span>
+                    <span name="totalPrice" class="amount text-2xl font-bold ml-2">₹<%= session.cart.totalPrice %></span>
+                </div>
+                <% if(user) { %>
+                    <div>
+                        <form action="/orders" method="POST" class="mt-12" id="payment-form">
+                            <div class="relative w-1/2 ml-auto mb-4">
+                                <select id="paymentType" name="paymentType" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                              <option value="cod">Cash on delivery</option>
+                              <option value="online">Pay Online</option>
+                            </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                </div>
+                            </div>
+                            <input name="phone" class="border border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Phone number" value="<%=user.phone_no%>">
+                            <input name="address" class="border border-gray-400 p-2 w-1/2" type="text" placeholder="Address" value="<%=user.default_address%>">
+                            <div class="mt-4">
+                                <div id="card-element"></div>
+                                <button class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6" type="submit">Order
+                                Now</button>
+                            </div>
+                        </form>
+                    </div>
+                    <% } else { %>
+                        <a href="/login" class="inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-6">Login
+                    to continue</a>
+                        <% } %>
+            </div>
+        </div>
+        <% } else { %>
+            <div class="empty-cart container mx-auto text-center">
+                <h1 class="mb-2">Cart Empty</h1>
+
+                <img class="mx-auto" src="images/empty-cart-img.png" alt="">
+                <a class="btn btn-primary" href="foods">Order Now</a>
+            </div>
+            <% } %>

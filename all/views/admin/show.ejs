@@ -1,0 +1,39 @@
+<%- layout('layouts/boilerplate') %>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card mb-3">
+                <img src="<%= food.img_url %> " class="card-img-top" alt="image">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= food.food_name %>
+                    </h5>
+                    <p class="card-text">
+                        Food Type:
+                        <%= food.food_type%>
+                    </p>
+                    <p class="card-text">
+                        Food Category:
+                        <%= food.category %>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-muted">
+                        Food Status:
+                        <%= food.food_status%>
+
+                    </li>
+                    <li class="list-group-item">Price: Rs.
+                        <%= food.unit_price %>/1 Qty</li>
+
+                </ul>
+                <div class="card-body">
+                    <a class="card-link btn btn-info" href="/admin/food/<%=food.food_id%>/edit">Edit</a>
+                    <form class="d-inline" action="/admin/food/<%=food.food_id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>

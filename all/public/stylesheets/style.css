@@ -1,11 +1,12 @@
 .image-left {
-    background-image: url("../images/food.jpg");
+    background-image: url("../images/login-page.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
     opacity: 0.9;
     height: 500px;
+    /* width: 800px; */
     border-radius: 3px;
 }
 
